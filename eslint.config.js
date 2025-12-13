@@ -1,3 +1,4 @@
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -55,15 +56,13 @@ export default tseslint.config(
       react: {
         version: 'detect',
       },
-      'import-x/resolver': {
-        typescript: {
+
+      'import-x/resolver-next': [
+        createTypeScriptImportResolver({
           project: ['./tsconfig.eslint.json'],
           alwaysTryTypes: true,
-        },
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts', '.json', '.scss', '.css'],
-        },
-      },
+        }),
+      ],
     },
   },
   {
