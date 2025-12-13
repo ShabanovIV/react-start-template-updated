@@ -1,0 +1,108 @@
+# БАЗОВОЕ ПРАВИЛО: все текстовые файлы в LF 
+# (git определит, что текстовое, что бинарное, если не указано явно)
+*                 text=auto eol=lf
+
+# Явно: исходники/конфиги (можно не дублировать, но так нагляднее)
+*.js              text eol=lf
+*.ts              text eol=lf
+*.tsx             text eol=lf
+*.jsx             text eol=lf
+*.mjs             text eol=lf
+*.cjs             text eol=lf
+*.json            text eol=lf
+*.jsonc           text eol=lf
+*.yml             text eol=lf
+*.yaml            text eol=lf
+*.md              text eol=lf
+*.html            text eol=lf
+*.css             text eol=lf
+*.scss            text eol=lf
+*.sass            text eol=lf
+*.env             text eol=lf
+*.dockerignore    text eol=lf
+Dockerfile        text eol=lf
+.editorconfig     text eol=lf
+.eslintrc*        text eol=lf
+.prettierrc*      text eol=lf
+.stylelintrc*     text eol=lf
+.browserslistrc   text eol=lf
+.gitignore        text eol=lf
+.gitattributes    text eol=lf
+.npmrc            text eol=lf
+.yarnrc*          text eol=lf
+yarn.lock         text eol=lf
+package-lock.json text eol=lf
+pnpm-lock.yaml    text eol=lf
+*.ps1             text eol=lf
+*.psm1            text eol=lf
+
+# Скрипты
+*.sh              text eol=lf
+
+# (если есть bat/cmd — им часто нужен CRLF на Windows)
+*.bat             text eol=crlf
+*.cmd             text eol=crlf
+
+# БИНАРНЫЕ ФАЙЛЫ: не трогать окончания строк
+# Изображения
+*.png             binary
+*.jpg             binary
+*.jpeg            binary
+*.gif             binary
+*.webp            binary
+*.avif            binary
+*.ico             binary
+*.bmp             binary
+*.tif             binary
+*.tiff            binary
+*.psd             binary
+
+# (SVG — текстовый формат, оставляем как text для нормальных диффов)
+*.svg             text eol=lf
+
+# Шрифты
+*.woff            binary
+*.woff2           binary
+*.ttf             binary
+*.otf             binary
+*.eot             binary
+
+# Аудио/видео
+*.mp3             binary
+*.wav             binary
+*.flac            binary
+*.m4a             binary
+*.aac             binary
+*.ogg             binary
+*.oga             binary
+*.mp4             binary
+*.webm            binary
+*.mov             binary
+*.mkv             binary
+*.avi             binary
+
+# Документы/архивы/прочие бинарники
+*.pdf             binary
+*.zip             binary
+*.7z              binary
+*.rar             binary
+*.tar             binary
+*.gz              binary
+*.bz2             binary
+*.xz              binary
+*.tgz             binary
+*.tbz2            binary
+*.txz             binary
+*.iso             binary
+*.db              binary
+*.sqlite          binary
+*.ai              binary
+*.wasm            binary
+*.exe             binary
+*.dll             binary
+*.so              binary
+*.dylib           binary
+*.jar             binary
+*.class           binary
+*.bin             binary
+*.glb             binary
