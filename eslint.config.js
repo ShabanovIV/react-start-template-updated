@@ -1,4 +1,3 @@
-import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -8,19 +7,9 @@ import eslintReactRefresh from 'eslint-plugin-react-refresh';
 import prettierPlugin from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginImportX from 'eslint-plugin-import-x';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 
-/** @type {import('eslint').Linter.Config[]} */
-export default tseslint.config(
-  {
-    plugins: {
-      '@typescript-eslint': tseslint.plugin,
-      react: eslintReact,
-      'react-hooks': eslintReactHooks,
-      'react-refresh': eslintReactRefresh,
-      prettier: prettierPlugin,
-      'import-x': eslintPluginImportX,
-    },
-  },
+export default [
   {
     ignores: [
       'dist',
@@ -34,11 +23,26 @@ export default tseslint.config(
       'jest.setup.ts',
     ],
   },
+
   js.configs.recommended,
+
+  // import-x наборы правил
   eslintPluginImportX.flatConfigs.recommended,
   eslintPluginImportX.flatConfigs.typescript,
+
   ...tseslint.configs.recommended,
+
+  // общие настройки окружения / парсера / плагинов
   {
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+      react: eslintReact,
+      'react-hooks': eslintReactHooks,
+      'react-refresh': eslintReactRefresh,
+      prettier: prettierPlugin,
+      'import-x': eslintPluginImportX,
+    },
+
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -52,10 +56,9 @@ export default tseslint.config(
         project: ['./tsconfig.eslint.json'],
       },
     },
+
     settings: {
-      react: {
-        version: 'detect',
-      },
+      react: { version: 'detect' },
 
       'import-x/resolver-next': [
         createTypeScriptImportResolver({
@@ -65,6 +68,8 @@ export default tseslint.config(
       ],
     },
   },
+
+  // декларации — не трогаем import-x правилами
   {
     files: ['**/*.d.ts'],
     rules: {
@@ -76,6 +81,8 @@ export default tseslint.config(
       'import-x/no-named-as-default-member': 'off',
     },
   },
+
+  // правила для TS/TSX
   {
     files: ['**/*.{ts,tsx}'],
     rules: {
@@ -84,7 +91,14 @@ export default tseslint.config(
 
       'import-x/no-dynamic-require': 'warn',
       'import-x/no-nodejs-modules': 'warn',
-      'import-x/no-unresolved': ['error', { ignore: ['\\.s?css$'] }],
+
+      // не пытаемся резолвить стили/ассеты как node-модули
+      'import-x/no-unresolved': [
+        'error',
+        {
+          ignore: ['\\.s?css$', '\\.svg(\\?url)?$', '\\.(png|jpe?g|gif|webp|avif|ico)$'],
+        },
+      ],
 
       'import-x/order': [
         'error',
@@ -120,4 +134,4 @@ export default tseslint.config(
       'max-params': ['error', 3],
     },
   },
-);
+];
