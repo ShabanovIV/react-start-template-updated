@@ -5,5 +5,7 @@
     "source.fixAll.eslint": "explicit"
   },
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "cSpell.words": ["ассеты", "парсера", "резолвить"]
+  "cSpell.words": ["ассеты", "парсера", "резолвить"],
+  "jest.jestCommandLine": "npm test -- --config jest.config.ts",
+  "jest.rootPath": "."
 }
